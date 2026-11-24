@@ -7,6 +7,8 @@ Papan pemuka **Dialog Prestasi 2026** bagi **semua subjek** (12 subjek): rumusan
 - `index.html` — aplikasi satu fail, tiada kebergantungan luar selain fon Google
 - **Murid berisiko**: murid Tahun 1–6 yang lemah dalam 3 subjek atau lebih
 - **Jurang PBD–UASA**: carta TP lawan markah UASA (setiap titik seorang murid)
+- **BMI**: status BMI Tahun 1–6 ikut kelas, perubahan ujian 1 → 2, senarai murid obes dan kurus
+- **SEGAK**: status kecergasan Tahun 4–6, purata skor setiap ujian, murid kurang cergas dan yang juga obes/berlebihan berat; profil murid memaparkan BMI dan skor SEGAK
 - **Cetak**: susun atur A4 bagi halaman semasa
 - **Persembahan**: skrin penuh tanpa bar sisi; ◀ ▶ untuk beralih, P untuk buka/tutup
 - Navigasi: bar sisi, carian nama murid, atau kekunci ◀ ▶ · M (menu utama)
