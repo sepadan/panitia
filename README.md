@@ -1,6 +1,6 @@
-# Panitia Matematik · SK Paya Redan
+# Dialog Prestasi 2026 · SK Paya Redan
 
-Papan pemuka **Dialog Prestasi Matematik 2026**: rumusan PBD akhir tahun (8 kelas, 205 murid) dan UASA Matematik Tahun 5–6, dengan analisis mengikut kelas serta kategori murid lemah, sederhana dan cemerlang.
+Papan pemuka **Dialog Prestasi 2026** bagi **semua subjek** (12 subjek): rumusan PBD akhir tahun (8 kelas, 205 murid) dan UASA (Tahun 4–6), dengan analisis mengikut subjek, kelas dan murid serta kategori lemah, sederhana dan cemerlang. Menu utama memaparkan kad setiap subjek; pilih subjek untuk ringkasan, rumusan PBD, keputusan UASA, jurang PBD–UASA, kategori murid, cadangan, ringkasan kelas dan profil murid. Halaman *Perbandingan subjek* memaparkan purata TP setiap kelas × subjek dan purata UASA setiap subjek.
 
 - `index.html` — aplikasi satu fail, tiada kebergantungan luar selain fon Google
 - Navigasi: bar sisi, carian nama murid, atau kekunci ◀ ▶ · M (menu utama) · F (skrin penuh)
