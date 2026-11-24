@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dialog Prestasi Matematik</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* VOICE dashboard sekolah maya: mesra, kemas, untuk dibentang dalam dialog prestasi
+   IDEA papan pemuka sekolah: bar sisi navigasi, kad putih bucu bulat di atas latar ungu lembut
+   PICTURE kad sambutan indigo dengan papan kapur ilustrasi; bar bertindan TP/gred; donat kategori
+   COLOUR latar #f4f2fc, kad putih, indigo #5b4fe9; Lemah #f2603f, Sederhana #ffc24b, Cemerlang #5b4fe9
+   TYPE Poppins 600/700 tajuk, Poppins 400 teks
+   LAYOUT bar sisi 250px + kandungan grid kad; telefon: nav mendatar di atas, kad satu lajur */
+:root{color-scheme:light dark;--bg:light-dark(#f4f2fc,#14121f);--card:light-dark(#ffffff,#1e1b2e);--ink:light-dark(#1c1a33,#ecebf5);--mut:light-dark(#77738f,#a6a2bf);--line:light-dark(#ebe8f5,#2c2842);--soft:light-dark(#f0eefb,#262238);--pri:#5b4fe9;--pri2:light-dark(#5b4fe9,#9a92ff);--L:#f2603f;--S:#ffc24b;--C:#5b4fe9;--side:light-dark(#ffffff,#1a1729)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Poppins,system-ui,sans-serif;display:grid;grid-template-columns:250px minmax(0,1fr);overflow-x:clip}
+button,select{font:inherit;color:inherit}
+aside{background:var(--side);border-right:1px solid var(--line);padding:24px 16px;display:flex;flex-direction:column;gap:6px;height:100vh;position:sticky;top:0;overflow-y:auto}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:17px;line-height:1.2;padding:0 8px 18px}
+.logo i{width:40px;height:40px;border-radius:12px;background:var(--pri);color:#fff;display:grid;place-items:center;font-style:normal;font-size:20px;flex:none}
+.logo small{display:block;font-weight:500;font-size:12px;color:var(--mut)}
+.nh{font-size:12px;color:var(--mut);font-weight:600;padding:14px 10px 4px}
+.nv{display:flex;align-items:center;gap:12px;border:0;background:none;text-align:left;padding:9px 12px;border-radius:12px;cursor:pointer;color:var(--mut);font-weight:500;min-height:42px}
+.nv svg{width:20px;height:20px;flex:none}
+.nv:hover{background:var(--soft);color:var(--ink)}
+.nv.on{background:var(--pri);color:#fff;box-shadow:0 6px 16px -6px var(--pri)}
+.nv .dot{width:8px;height:8px;border-radius:50%;background:var(--c);flex:none;margin:0 6px}
+main{padding:24px clamp(16px,3vw,36px) 40px;display:flex;flex-direction:column;gap:22px}
+.top{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.top h1{font-size:26px;line-height:1.15;margin:0;font-weight:700;letter-spacing:-.01em}
+.top .sub{color:var(--mut);font-size:14px}
+.top .sp{flex:1}
+.chip{background:var(--card);border:1px solid var(--line);border-radius:99px;padding:8px 16px;font-size:13px;font-weight:600;white-space:nowrap}
+.ib{border:1px solid var(--line);background:var(--card);border-radius:12px;min-width:44px;height:44px;cursor:pointer;font-weight:600;padding:0 14px}
+.ib:hover{border-color:var(--pri)}
+.ib:focus-visible,.nv:focus-visible,.cl:focus-visible{outline:3px solid var(--pri2);outline-offset:2px}
+.grid{display:grid;gap:20px;grid-template-columns:repeat(12,minmax(0,1fr))}
+.card{background:var(--card);border-radius:20px;padding:22px;box-shadow:0 1px 2px rgba(30,20,90,.04),0 8px 24px -12px rgba(30,20,90,.12)}
+.card h3{margin:0 0 4px;font-size:17px;font-weight:600}
+.card .cap{color:var(--mut);font-size:13px;margin:0 0 16px}
+.s12{grid-column:span 12}.s8{grid-column:span 8}.s7{grid-column:span 7}.s6{grid-column:span 6}.s5{grid-column:span 5}.s4{grid-column:span 4}.s3{grid-column:span 3}
+.hero{background:var(--pri);color:#fff;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);align-items:center;gap:20px;padding:28px 32px;overflow:hidden;position:relative}
+.hero h2{font-size:clamp(24px,2.6vw,36px);line-height:1.1;margin:6px 0 10px;font-weight:700;letter-spacing:-.015em;text-wrap:balance}
+.hero p{margin:0;opacity:.88;max-width:520px}
+.hero .k{font-size:13px;opacity:.8}
+.hero svg{width:100%;max-height:210px}
+.stat{display:flex;align-items:center;gap:14px}
+.stat .ic{width:50px;height:50px;border-radius:15px;display:grid;place-items:center;background:var(--t);color:var(--c);flex:none}
+.stat .ic svg{width:24px;height:24px}
+.stat .v{font-size:28px;font-weight:700;line-height:1.1;white-space:nowrap}
+.stat .l{color:var(--mut);font-size:13px;line-height:1.3}
+.stk{display:flex;height:14px;border-radius:99px;overflow:hidden;background:var(--soft);gap:2px}
+.stk i{display:block;height:100%}
+.stk.big{height:30px;border-radius:10px}
+.stk.big i{display:flex;align-items:center;justify-content:center;font-style:normal;font-size:12px;font-weight:600;color:#fff}
+.stk.big i.lt{color:#1c1a33}
+.row{display:grid;grid-template-columns:130px minmax(0,1fr) 72px;gap:14px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line)}
+.row:last-child{border-bottom:0}
+.row b{font-weight:600}
+.row .n{text-align:right;font-weight:600;white-space:nowrap;font-variant-numeric:tabular-nums}
+.row.go{cursor:pointer;border-radius:10px}
+.row.go:hover{background:var(--soft)}
+.leg{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12px;color:var(--mut);margin-top:12px}
+.leg span{display:inline-flex;align-items:center;gap:6px}
+.leg span::before{content:"";width:10px;height:10px;border-radius:3px;background:var(--c)}
+.track{height:10px;border-radius:99px;background:var(--soft);overflow:hidden}
+.track i{display:block;height:100%;border-radius:99px;background:var(--c,#b9b4dc)}
+.donut{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.donut svg{width:170px;height:170px;flex:none}
+.dl{display:flex;flex-direction:column;gap:10px;flex:1;min-width:150px}
+.dl div{display:grid;grid-template-columns:12px minmax(0,1fr) auto 38px;align-items:center;gap:10px}
+.dl i{width:12px;height:12px;border-radius:4px;background:var(--c)}
+.dl b{font-weight:700;text-align:right}
+.dl .note{text-align:right}
+.cls{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.cl{border:1px solid var(--line);background:var(--card);border-radius:18px;padding:16px;text-align:left;cursor:pointer;display:flex;flex-direction:column;gap:10px}
+.cl:hover{border-color:var(--pri);transform:translateY(-2px)}
+.cl b{font-size:16px;font-weight:600}
+.cl .m{font-size:12.5px;color:var(--mut)}
+.tag{display:inline-block;border-radius:8px;padding:2px 8px;font-size:12px;font-weight:600;background:var(--t);color:var(--c)}
+table{border-collapse:collapse;width:100%}
+th{font-size:12px;color:var(--mut);font-weight:600;text-align:left;padding:8px 10px;border-bottom:1px solid var(--line)}
+td{padding:10px;border-bottom:1px solid var(--line)}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr.go{cursor:pointer}tr.go:hover td{background:var(--soft)}
+.mx td{text-align:center;font-weight:600;height:46px;border-radius:0}
+.mx td.h{text-align:left}
+.callout{background:#fff4d6;color:#4a3a00;border-radius:16px;padding:16px 18px}
+.callout h3{color:#4a3a00}
+ul.t{margin:0;padding-left:20px}ul.t li{margin:5px 0}
+.col3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.cat{border-top:5px solid var(--c)}
+.cat h3{display:flex;justify-content:space-between}
+.note{font-size:12.5px;color:var(--mut)}
+.scroll{overflow-x:auto}
+.fade{animation:f .35s ease both}
+@keyframes f{from{opacity:0;transform:translateY(6px)}}
+@media (prefers-reduced-motion:reduce){.fade{animation:none}.cl:hover{transform:none}}
+@media (max-width:1180px){.cls{grid-template-columns:repeat(2,minmax(0,1fr))}.s3{grid-column:span 6}.s8,.s7,.s5,.s4{grid-column:span 12}}
+@media (max-width:860px){
+ body{grid-template-columns:minmax(0,1fr)}
+ aside{position:sticky;top:0;height:auto;flex-direction:row;overflow-x:auto;padding:10px 12px;gap:6px;z-index:5;border-right:0;border-bottom:1px solid var(--line)}
+ .logo,.nh{display:none}
+ .nv{flex:none;padding:8px 12px}
+ .hero{grid-template-columns:minmax(0,1fr)}.hero svg{display:none}
+ .s6,.s3{grid-column:span 12}
+ .col3{grid-template-columns:minmax(0,1fr)}
+ .row{grid-template-columns:86px minmax(0,1fr) 56px;gap:8px}
+ #bFull{display:none}
+}
+@media (max-width:520px){.cls{grid-template-columns:minmax(0,1fr)}.top h1{font-size:21px}}
+</style>
+</head>
+<body>
+<aside id="side" aria-label="Navigasi"></aside>
+<main>
+  <div class="top">
+    <div><h1 id="ttl">Dialog Prestasi Matematik</h1><div class="sub" id="sub"></div></div>
+    <span class="sp"></span>
+    <span class="chip">SK Paya Redan · Sesi 2026</span>
+    <button class="ib" id="bPrev" aria-label="Paparan sebelum">◀</button>
+    <button class="ib" id="bNext" aria-label="Paparan seterusnya">▶</button>
+    <button class="ib" id="bFull">Skrin penuh</button>
+  </div>
+  <div id="view"></div>
+  <p class="note">Versi awam: angka agregat sahaja, tanpa nama atau markah individu murid. Sumber: PBD akhir tahun 2026 (8 kelas) dan laporan UASA 2026 Tahun 4–6.</p>
+</main>
+<script>
+{
+const D = {"K":[{"id":"1b","nama":"Tahun 1 Bijak","uasaFile":false,"n":28,"dist":[0,0,4,15,3,6],"avgTP":4.4,"oth":4.5,"hasU":false,"cat":{"L":0,"S":19,"C":9},"jan":{"L":{"n":18,"tp":4.4,"u":null},"P":{"n":10,"tp":4.3,"u":null}}},{"id":"2b","nama":"Tahun 2 Bijak","uasaFile":false,"n":23,"dist":[0,0,1,9,8,5],"avgTP":4.7,"oth":5.0,"hasU":false,"cat":{"L":0,"S":10,"C":13},"jan":{"L":{"n":9,"tp":4.7,"u":null},"P":{"n":14,"tp":4.8,"u":null}}},{"id":"2c","nama":"Tahun 2 Cerdik","uasaFile":false,"n":24,"dist":[0,1,3,16,0,4],"avgTP":4.1,"oth":4.6,"hasU":false,"cat":{"L":1,"S":19,"C":4},"jan":{"L":{"n":13,"tp":3.8,"u":null},"P":{"n":11,"tp":4.5,"u":null}}},{"id":"3b","nama":"Tahun 3 Bijak","uasaFile":false,"n":29,"dist":[0,0,4,7,7,11],"avgTP":4.9,"oth":4.6,"hasU":false,"cat":{"L":0,"S":11,"C":18},"jan":{"L":{"n":17,"tp":4.8,"u":null},"P":{"n":12,"tp":5,"u":null}}},{"id":"4b","nama":"Tahun 4 Bijak","uasaFile":true,"n":32,"dist":[0,0,0,14,10,8],"avgTP":4.8,"oth":4.8,"hasU":false,"cat":{"L":0,"S":14,"C":18},"jan":{"L":{"n":12,"tp":5.2,"u":null},"P":{"n":20,"tp":4.5,"u":null}}},{"id":"5b","nama":"Tahun 5 Bijak","uasaFile":true,"n":21,"dist":[0,0,6,4,10,1],"avgTP":4.3,"oth":5.2,"hasU":true,"cat":{"L":10,"S":6,"C":5},"jan":{"L":{"n":10,"tp":4.5,"u":45.4},"P":{"n":11,"tp":4.1,"u":39.5}},"grd":[0,5,3,3,9,1],"uAvg":42.3,"lulus":11,"cplus":8,"nu":21,"gap":4,"jx":[{"t":3,"C":0,"S":0,"L":6,"avg":22.3},{"t":4,"C":0,"S":0,"L":4,"avg":26.5},{"t":5,"C":4,"S":6,"L":0,"avg":57.2},{"t":6,"C":1,"S":0,"L":0,"avg":null}]},{"id":"5c","nama":"Tahun 5 Cerdik","uasaFile":true,"n":19,"dist":[0,0,0,9,6,4],"avgTP":4.7,"oth":4.6,"hasU":true,"cat":{"L":16,"S":3,"C":0},"jan":{"L":{"n":9,"tp":5,"u":24.2},"P":{"n":10,"tp":4.5,"u":17.9}},"grd":[0,0,0,3,6,10],"uAvg":20.9,"lulus":3,"cplus":0,"nu":19,"gap":16,"jx":[{"t":4,"C":0,"S":0,"L":9,"avg":15.2},{"t":5,"C":0,"S":0,"L":6,"avg":18.3},{"t":6,"C":0,"S":3,"L":1,"avg":37.5}]},{"id":"6b","nama":"Tahun 6 Bijak","uasaFile":true,"n":29,"dist":[0,0,0,17,8,4],"avgTP":4.6,"oth":5.1,"hasU":true,"cat":{"L":21,"S":6,"C":2},"jan":{"L":{"n":20,"tp":4.4,"u":26.1},"P":{"n":9,"tp":4.9,"u":38.7}},"grd":[0,2,2,4,11,10],"uAvg":30.0,"lulus":8,"cplus":4,"nu":29,"gap":21,"jx":[{"t":4,"C":0,"S":0,"L":17,"avg":19.2},{"t":5,"C":0,"S":4,"L":4,"avg":37.8},{"t":6,"C":2,"S":2,"L":0,"avg":60}]}],"T":{"n":205,"dist":[0,1,18,91,52,43],"avgTP":4.6,"uN":69,"uAvg":31.2,"lulus":22,"cplus":12,"ef":47,"gap":41,"tp4u":63,"cat":{"L":48,"S":88,"C":69},"tp4":186,"tp56":95}};
+const K = D.K, T = D.T;
+const SUBJ = {"4b": {"BM": null, "BI": null, "MM": null, "SAINS": null, "SEJ": 54.7, "PAI": 67.9, "PSV": 75.9, "PMZ": 76.6, "AR": 66.5, "PJPK": 74.2, "RBT": 71.1}, "5b": {"BM": 76.1, "BI": 56.3, "MM": 42.3, "SAINS": 58.6, "SEJ": 65.5, "PAI": 76.1, "PSV": 75.3, "PMZ": 74.2, "AR": 79.7, "PJPK": 67.4, "RBT": 80.6}, "5c": {"BM": 66.3, "BI": 35.9, "MM": 20.9, "SAINS": 40, "SEJ": 53.6, "PAI": 61.7, "PSV": 60.3, "PMZ": 72.9, "AR": 59.4, "PJPK": 47.3, "RBT": 72.6}, "6b": {"BM": 71.7, "BI": 46.8, "MM": 30.0, "SAINS": 49.4, "SEJ": 63.7, "PAI": 68.1, "PSV": 78, "PMZ": 76, "AR": 77.8, "PJPK": 84.3, "RBT": 63.3}};
+const NAMA_SUBJ = {BM:'B. Melayu',BI:'B. Inggeris',MM:'Matematik',SAINS:'Sains',SEJ:'Sejarah',PAI:'Pend. Islam',PMZ:'Muzik',PSV:'Seni Visual',PJPK:'PJK',AR:'B. Arab',RBT:'RBT'};
+const esc = v => String(v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const f1 = x => x == null ? '—' : (Math.round(x*10)/10).toFixed(1);
+const pc = (a,b) => b ? Math.round(a/b*100) : 0;
+const sgn = x => (x>=0?'+':'') + f1(x);
+const TPC = {1:'#a3261a',2:'#f2603f',3:'#ff9f45',4:'#ffc24b',5:'#9a92ff',6:'#5b4fe9'};
+const GC = {A:'#3a2fc4',B:'#5b4fe9',C:'#ffc24b',D:'#ff9f45',E:'#f2603f',F:'#a3261a'};
+const LT = {3:1,4:1,C:1,D:1,S:1};
+const CATC = {L:'var(--L)',S:'var(--S)',C:'var(--C)'};
+const UK = K.filter(k=>k.hasU);
+const kById = id => K.find(k=>k.id===id);
+const short = n => n.replace('Tahun ','T');
+
+const ICON = {
+  home:'<path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',
+  bar:'<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
+  doc:'<path d="M6 3h9l5 5v13H6z"/><path d="M14 3v6h6M9 13h8M9 17h6"/>',
+  book:'<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/>',
+  link:'<path d="M9 15l6-6M10 6l1-1a4 4 0 0 1 6 6l-1 1M14 18l-1 1a4 4 0 0 1-6-6l1-1"/>',
+  users:'<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6 6 0 0 1 4 6"/>',
+  flag:'<path d="M5 21V4M5 4h11l-2 4 2 4H5"/>',
+  star:'<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>',
+  alert:'<path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18v.5"/>'
+};
+const ico = n => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICON[n]}</svg>`;
+
+const stk = (arr, cols, keys, big) => { const n = arr.reduce((a,b)=>a+b,0);
+  return `<div class="stk${big?' big':''}">${arr.map((v,i)=>v?`<i class="${LT[keys[i]]?'lt':''}" style="width:${v/n*100}%;background:${cols[keys[i]]}" title="${keys[i]}: ${v}">${big&&v/n>=.06?v:''}</i>`:'').join('')}</div>`; };
+const tpStk = (d,b) => stk(d, TPC, [1,2,3,4,5,6], b);
+const gStk = (d,b) => stk(d, GC, ['A','B','C','D','E','F'], b);
+const catStk = (c,b) => stk([c.L,c.S,c.C], CATC, ['L','S','C'], b);
+const tpLeg = `<div class="leg">${[1,2,3,4,5,6].map(t=>`<span style="--c:${TPC[t]}">TP${t}</span>`).join('')}</div>`;
+const gLeg = `<div class="leg">${'ABCDEF'.split('').map(g=>`<span style="--c:${GC[g]}">${g}</span>`).join('')}<span style="--c:transparent">A ≥82 · B 66–81 · C 50–65 · D 35–49 · E 20–34 · F &lt;20</span></div>`;
+const stat = (icon, v, l, c, t) => `<div class="card s3 stat"><div class="ic" style="--c:${c};--t:${t}">${ico(icon)}</div><div><div class="v">${v}</div><div class="l">${l}</div></div></div>`;
+const donut = c => { const tot = c.L+c.S+c.C, R = 70, C2 = 2*Math.PI*R; let off = 0;
+  const seg = (v,col) => { const len = v/tot*C2; const s = `<circle cx="85" cy="85" r="${R}" fill="none" stroke="${col}" stroke-width="22" stroke-dasharray="${Math.max(len-3,0)} ${C2}" stroke-dashoffset="${-off}" transform="rotate(-90 85 85)"/>`; off += len; return s; };
+  return `<div class="donut"><svg viewBox="0 0 170 170" aria-label="Kategori murid">${seg(c.L,'#f2603f')}${seg(c.S,'#ffc24b')}${seg(c.C,'#5b4fe9')}<text x="85" y="82" text-anchor="middle" font-size="28" font-weight="700" fill="currentColor">${tot}</text><text x="85" y="104" text-anchor="middle" font-size="12" fill="currentColor" opacity=".6">murid</text></svg>
+  <div class="dl">${[['L','Lemah'],['S','Sederhana'],['C','Cemerlang']].map(([k,n])=>`<div style="--c:${CATC[k]}"><i></i>${n}<b>${c[k]}</b><span class="note">${pc(c[k],tot)}%</span></div>`).join('')}</div></div>`; };
+const catNote = `<p class="note">Kategori: jika ada markah UASA — Cemerlang gred A–B (≥66), Sederhana C–D (35–65), Lemah E–F (&lt;35). Tanpa UASA — ikut TP: Cemerlang TP5–6, Sederhana TP3–4, Lemah TP1–2.</p>`;
+const board = `<svg viewBox="0 0 320 200" aria-hidden="true">
+  <rect x="30" y="20" width="260" height="150" rx="14" fill="#3b31b8"/><rect x="42" y="32" width="236" height="126" rx="8" fill="#2a2290"/>
+  <g fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".9"><path d="M62 70h22M73 59v22"/><path d="M104 70h20"/><path d="M144 62l16 16M160 62l-16 16"/><path d="M180 66h20M180 74h20"/><path d="M220 58c10-6 22 0 16 10l-16 14h20"/></g>
+  <g opacity=".85"><rect x="62" y="104" width="18" height="40" rx="4" fill="#f2603f"/><rect x="88" y="94" width="18" height="50" rx="4" fill="#ffc24b"/><rect x="114" y="116" width="18" height="28" rx="4" fill="#ff9f45"/><rect x="140" y="88" width="18" height="56" rx="4" fill="#9a92ff"/></g>
+  <circle cx="230" cy="122" r="22" fill="none" stroke="#ffc24b" stroke-width="10" stroke-dasharray="90 200" transform="rotate(-90 230 122)"/><circle cx="230" cy="122" r="22" fill="none" stroke="#fff" stroke-width="10" stroke-dasharray="48 200" stroke-dashoffset="-92" transform="rotate(-90 230 122)" opacity=".7"/>
+  <rect x="110" y="170" width="100" height="10" rx="5" fill="#3b31b8"/><rect x="250" y="164" width="30" height="8" rx="3" fill="#fff" opacity=".8"/></svg>`;
+
+const V = {};
+V.utama = () => `<div class="grid">
+  <div class="card hero s12"><div><div class="k">Panitia Matematik · Dialog prestasi akhir tahun</div>
+    <h2>${pc(T.tp4,T.n)}% murid TP4 ke atas, tetapi hanya ${T.lulus} daripada ${T.uN} murid Tahun 5–6 lulus UASA</h2>
+    <p>PBD dan UASA Matematik belum selari. Matematik juga subjek dengan purata UASA terendah dalam ketiga-tiga kelas yang ada markah.</p></div>${board}</div>
+  ${stat('users',T.n,'murid, 8 kelas Tahun 1–6','#5b4fe9','#eceaff')}
+  ${stat('bar',f1(T.avgTP),'purata TP Matematik (PBD)','#d98a00','#fff3d6')}
+  ${stat('doc',f1(T.uAvg),`purata UASA (${T.uN} murid Tahun 5–6)`,'#f2603f','#ffe7e1')}
+  ${stat('alert',T.gap,`murid TP4+ tetapi gred E/F`,'#a3261a','#fde3df')}
+  <div class="card s8"><h3>Prestasi mengikut kelas</h3><p class="cap">Taburan TP Matematik · klik kelas untuk butiran</p>
+    ${K.map(k=>`<div class="row go" data-go="k-${k.id}"><b>${esc(k.nama)}</b>${tpStk(k.dist)}<span class="n">TP ${f1(k.avgTP)}</span></div>`).join('')}${tpLeg}</div>
+  <div class="card s4"><h3>Kategori murid</h3><p class="cap">Seluruh sekolah</p>${donut(T.cat)}
+    <div class="callout" style="margin-top:18px"><b>${T.ef} / ${T.uN}</b> murid Tahun 5–6 mendapat gred E atau F dalam UASA. Tiada gred A.</div></div>
+</div>`;
+
+V.pbd = () => `<div class="grid">
+  ${stat('users',T.n,'murid','#5b4fe9','#eceaff')}${stat('star',T.tp56+` <small style="font-size:15px;color:var(--mut)">${pc(T.tp56,T.n)}%</small>`,'murid TP5–6','#5b4fe9','#eceaff')}${stat('bar',T.dist[2]+T.dist[3]+` <small style="font-size:15px;color:var(--mut)">${pc(T.dist[2]+T.dist[3],T.n)}%</small>`,'murid TP3–4','#d98a00','#fff3d6')}${stat('alert',T.dist[0]+T.dist[1],'murid TP1–2','#f2603f','#ffe7e1')}
+  <div class="card s12"><h3>Taburan TP Matematik setiap kelas</h3><p class="cap">Bilangan murid di setiap TP · Tahun 4 Bijak, 5 Cerdik dan 6 Bijak tiada murid di bawah TP4</p>
+    ${K.map(k=>`<div class="row go" data-go="k-${k.id}"><b>${esc(k.nama)}</b>${tpStk(k.dist,1)}<span class="n">TP ${f1(k.avgTP)}</span></div>`).join('')}
+    <div class="row"><b>Sekolah</b>${tpStk(T.dist,1)}<span class="n">TP ${f1(T.avgTP)}</span></div>${tpLeg}</div>
+</div>`;
+
+V.uasa = () => `<div class="grid">
+  ${UK.map(k=>stat('doc',f1(k.uAvg),`purata UASA ${esc(k.nama)} · ${k.lulus}/${k.nu} lulus`,k.uAvg<35?'#f2603f':'#d98a00',k.uAvg<35?'#ffe7e1':'#fff3d6')).join('')}
+  ${stat('alert',T.ef,`daripada ${T.uN} murid gred E/F`,'#a3261a','#fde3df')}
+  <div class="card s7"><h3>Taburan gred UASA Matematik</h3><p class="cap">Lulus = gred D ke atas (≥35)</p>
+    ${UK.map(k=>`<div class="row go" data-go="k-${k.id}"><b>${esc(k.nama)}</b>${gStk(k.grd,1)}<span class="n">${k.lulus}/${k.nu}</span></div>`).join('')}${gLeg}</div>
+  <div class="card s5"><h3>Ringkasan</h3><p class="cap">Tahun 4 Bijak: UASA Matematik “Tidak Ditaksir”. Tahun 1–3: tiada data UASA.</p>
+    <div class="scroll"><table><tr><th>Kelas</th><th class="n">Purata</th><th class="n">D+</th><th class="n">C+</th><th class="n">E/F</th></tr>
+    ${UK.map(k=>`<tr class="go" data-go="k-${k.id}"><td>${esc(k.nama)}</td><td class="n"><b>${f1(k.uAvg)}</b></td><td class="n">${k.lulus}</td><td class="n">${k.cplus}</td><td class="n">${k.grd[4]+k.grd[5]}</td></tr>`).join('')}
+    <tr><td><b>Keseluruhan</b></td><td class="n"><b>${f1(T.uAvg)}</b></td><td class="n">${T.lulus}</td><td class="n">${T.cplus}</td><td class="n">${T.ef}</td></tr></table></div></div>
+</div>`;
+
+V.subjek = () => `<div class="grid">
+  ${UK.map(k=>{ const rows = Object.entries(SUBJ[k.id]).filter(e=>e[1]!=null).sort((x,y)=>x[1]-y[1]);
+    return `<div class="card s4"><h3>${esc(k.nama)}</h3><p class="cap">Purata UASA setiap subjek · Matematik ${f1(SUBJ[k.id].BI-SUBJ[k.id].MM)} markah di bawah B. Inggeris</p>
+    ${rows.map(([s,v])=>`<div class="row" style="grid-template-columns:96px minmax(0,1fr) 44px;padding:6px 0"><span style="${s==='MM'?'font-weight:700':''}">${NAMA_SUBJ[s]}</span><div class="track" style="--c:${s==='MM'?'#f2603f':'#c9c4ec'}"><i style="width:${v}%"></i></div><span class="n">${f1(v)}</span></div>`).join('')}</div>`; }).join('')}
+  <div class="card s12"><h3>PBD: TP Matematik berbanding purata TP subjek lain</h3><p class="cap">Negatif = Matematik lebih rendah daripada subjek lain dalam kelas yang sama</p>
+    <div class="cls">${K.map(k=>{ const d=k.avgTP-k.oth; return `<div class="cl" style="cursor:default"><b>${esc(k.nama)}</b><span style="font-size:24px;font-weight:700;color:${d<-.2?'var(--L)':'var(--pri2)'}">${sgn(d)}</span><span class="m">MM ${f1(k.avgTP)} · lain ${f1(k.oth)}</span></div>`; }).join('')}</div></div>
+</div>`;
+
+V.jurang = () => {
+  const cell = (n, bad) => n ? `<td style="background:${bad?`color-mix(in srgb,#f2603f ${Math.min(90,25+n*6)}%,transparent)`:'var(--soft)'};${bad&&n>=6?'color:#fff':''}">${n}</td>` : '<td style="color:var(--mut)">·</td>';
+  const k5c = kById('5c');
+  return `<div class="grid">
+  ${UK.map(k=>`<div class="card s4"><h3>${esc(k.nama)}</h3><p class="cap">${k.gap} murid TP4+ tetapi E/F</p><table class="mx"><tr><th></th><th class="n">A–B</th><th class="n">C–D</th><th class="n">E–F</th><th class="n">Purata</th></tr>
+    ${k.jx.map(r=>`<tr><td class="h"><b>TP${r.t}</b></td>${cell(r.C,0)}${cell(r.S,0)}${cell(r.L,r.t>=4)}<td>${r.avg==null?'<span class="note">—</span>':f1(r.avg)}</td></tr>`).join('')}</table></div>`).join('')}
+  <div class="card s6"><h3>Apa yang ditunjukkan</h3><ul class="t">
+    <li>${T.gap} daripada ${T.tp4u} murid yang diberi TP4 ke atas mendapat gred E/F dalam UASA.</li>
+    <li>Tahun 5 Cerdik paling ketara: ${k5c.gap} daripada ${k5c.n} murid.</li>
+    <li>Tahun 5 Bijak paling selari: semua murid TP3 mendapat E/F, kebanyakan TP5–6 mendapat C ke atas.</li>
+    <li>Petunjuk usaha Matematik semua murid Tahun 4–6 dicatat “Tinggi”.</li></ul>
+    <p class="note">Petak merah: TP4+ tetapi E/F. Purata disembunyikan bagi kumpulan kurang 3 murid.</p></div>
+  <div class="card s6 callout"><h3>Soalan untuk dialog</h3><ul class="t">
+    <li>Adakah eviden TP4 mencerminkan kemahiran sebenar murid?</li>
+    <li>Perlukah moderasi TP Matematik antara guru sebelum laporan dimuktamadkan?</li>
+    <li>Adakah format atau aras soalan UASA berbeza ketara daripada tugasan PBD?</li></ul></div>
+</div>`; };
+
+V.kategori = () => `<div class="grid">
+  <div class="card s4"><h3>Seluruh sekolah</h3><p class="cap">${T.n} murid</p>${donut(T.cat)}</div>
+  <div class="card s8"><h3>Kategori mengikut kelas</h3><p class="cap">Asas: UASA bagi Tahun 5–6, TP PBD bagi kelas lain</p>
+    ${K.map(k=>`<div class="row go" data-go="k-${k.id}" style="grid-template-columns:130px minmax(0,1fr) 150px"><b>${esc(k.nama)}</b>${catStk(k.cat,1)}<span class="n" style="font-weight:500;font-size:13px"><span style="color:var(--L);font-weight:700">${k.cat.L}</span> · ${k.cat.S} · <span style="color:var(--pri2);font-weight:700">${k.cat.C}</span></span></div>`).join('')}
+    <div class="leg"><span style="--c:var(--L)">Lemah</span><span style="--c:var(--S)">Sederhana</span><span style="--c:var(--C)">Cemerlang</span></div>${catNote}</div>
+</div>`;
+
+V.cadangan = () => `<div class="grid">
+  <div class="card s12 col3" style="background:none;box-shadow:none;padding:0">
+    <div class="card cat" style="--c:var(--L)"><h3>Lemah <span class="tag" style="--t:#ffe7e1;--c:#c2401f">${T.cat.L} murid</span></h3><ul class="t">
+      <li>Kelas bimbingan kumpulan kecil, terutama Tahun 5 Cerdik dan murid Tahun 5 Bijak yang naik ke Tahun 6.</li>
+      <li>Ujian diagnostik awal tahun: nilai tempat, sifir, empat operasi asas.</li>
+      <li>Latih tubi fakta asas 10 minit setiap hari dengan bahan konkrit.</li>
+      <li>Pantau kemajuan setiap bulan dan maklum ibu bapa.</li></ul></div>
+    <div class="card cat" style="--c:var(--S)"><h3>Sederhana <span class="tag" style="--t:#fff3d6;--c:#8a5a00">${T.cat.S} murid</span></h3><ul class="t">
+      <li>Latihan topikal mengikut topik yang paling banyak hilang markah.</li>
+      <li>Ajar langkah menyelesaikan soalan berayat: fahami, rancang, selesai, semak.</li>
+      <li>Latihan bertahap dari aras sederhana ke aras tinggi.</li>
+      <li>Sasaran: naik satu gred dalam UASA seterusnya.</li></ul></div>
+    <div class="card cat" style="--c:var(--C)"><h3>Cemerlang <span class="tag" style="--t:#eceaff;--c:#3a2fc4">${T.cat.C} murid</span></h3><ul class="t">
+      <li>Aktiviti pengayaan dan soalan KBAT.</li>
+      <li>Jadikan pembimbing rakan sebaya dalam kumpulan.</li>
+      <li>Sertai pertandingan Matematik peringkat daerah dan negeri.</li></ul></div>
+  </div>
+  <div class="card s12 callout"><h3>Tindakan panitia</h3><ul class="t">
+    <li>Moderasi TP Matematik antara guru sebelum laporan PBD dimuktamadkan.</li>
+    <li>Lengkapkan markah UASA Tahun 4 Bijak (kini “Tidak Ditaksir”).</li>
+    <li>Bandingkan item UASA dengan tugasan PBD bagi Tahun 5–6.</li></ul></div>
+</div>`;
+
+const kelas = k => {
+  const g = j => k.jan[j].n ? `${k.jan[j].n} murid · TP ${f1(k.jan[j].tp)}${k.hasU?` · UASA ${f1(k.jan[j].u)}`:''}` : '—';
+  return `<div class="grid">
+  ${stat('users',k.n,'murid','#5b4fe9','#eceaff')}
+  ${stat('bar',f1(k.avgTP),`purata TP Matematik (lain ${f1(k.oth)})`,'#d98a00','#fff3d6')}
+  ${k.hasU ? stat('doc',f1(k.uAvg),`purata UASA · ${k.lulus}/${k.nu} lulus`,'#f2603f','#ffe7e1') + stat('alert',k.gap,'murid TP4+ tetapi E/F','#a3261a','#fde3df')
+    : stat('star',k.dist[4]+k.dist[5],'murid TP5–6','#5b4fe9','#eceaff') + stat('alert',k.dist[0]+k.dist[1]+k.dist[2],'murid TP3 ke bawah','#f2603f','#ffe7e1')}
+  <div class="card s6"><h3>Taburan TP Matematik</h3><p class="cap">PBD akhir tahun</p>
+    ${[6,5,4,3,2,1].map(t=>`<div class="row" style="grid-template-columns:52px minmax(0,1fr) 40px"><b>TP${t}</b><div class="track" style="--c:${TPC[t]}"><i style="width:${k.dist[t-1]/k.n*100}%"></i></div><span class="n">${k.dist[t-1]}</span></div>`).join('')}</div>
+  <div class="card s6">${k.hasU?`<h3>Taburan gred UASA</h3><p class="cap">UASA Matematik 2026</p>
+    ${'ABCDEF'.split('').map((x,i)=>`<div class="row" style="grid-template-columns:52px minmax(0,1fr) 40px"><b>${x}</b><div class="track" style="--c:${GC[x]}"><i style="width:${k.grd[i]/k.nu*100}%"></i></div><span class="n">${k.grd[i]}</span></div>`).join('')}`
+    : `<h3>UASA</h3><p class="cap">${k.uasaFile?'Markah UASA Matematik (juga BM, BI dan Sains) tercatat “Tidak Ditaksir”. Analisis menggunakan TP PBD sahaja.':'Tiada data UASA untuk kelas ini. Analisis menggunakan TP PBD sahaja.'}</p><div class="callout">${k.dist[4]+k.dist[5]} daripada ${k.n} murid di TP5–6; ${k.dist[0]+k.dist[1]+k.dist[2]} murid di TP3 ke bawah.</div>`}</div>
+  <div class="card s6"><h3>Kategori murid</h3><p class="cap">Asas: ${k.hasU?'UASA':'TP PBD'}</p>${donut(k.cat)}</div>
+  <div class="card s6"><h3>Mengikut jantina</h3><p class="cap">Purata Matematik</p>
+    <div class="row" style="grid-template-columns:100px minmax(0,1fr)"><b>Lelaki</b><span>${g('L')}</span></div>
+    <div class="row" style="grid-template-columns:100px minmax(0,1fr)"><b>Perempuan</b><span>${g('P')}</span></div>
+    ${catNote}</div>
+</div>`; };
+
+const NAV = [['utama','Utama','home'],['pbd','Rumusan PBD','bar'],['uasa','Keputusan UASA','doc'],['subjek','Matematik vs subjek lain','book'],['jurang','Jurang PBD–UASA','link'],['kategori','Kategori murid','users'],['cadangan','Cadangan tindakan','flag']];
+const SEQ = [...NAV.map(n=>n[0]), ...K.map(k=>`k-${k.id}`)];
+const TITLE = {utama:['Dialog Prestasi Matematik 2026','Ringkasan PBD dan UASA seluruh sekolah'],pbd:['Rumusan PBD','Tahap penguasaan Matematik akhir tahun, 8 kelas'],uasa:['Keputusan UASA Matematik','Tahun 5–6'],subjek:['Matematik berbanding subjek lain','Purata UASA dan TP PBD'],jurang:['Jurang PBD dan UASA','Keselarasan TP dengan gred UASA, Tahun 5–6'],kategori:['Murid lemah, sederhana, cemerlang','Bilangan murid mengikut kategori'],cadangan:['Cadangan tindakan','Fokus 2027']};
+const side = document.getElementById('side');
+side.innerHTML = `<div class="logo"><i>∑</i><span>Panitia Matematik<small>SK Paya Redan</small></span></div>
+  <div class="nh">Menu</div>${NAV.map(([id,n,ic])=>`<button class="nv" data-go="${id}">${ico(ic)}<span>${n}</span></button>`).join('')}
+  <div class="nh">Kelas</div>${K.map(k=>`<button class="nv" data-go="k-${k.id}"><span class="dot" style="--c:${k.hasU?(k.uAvg<35?'#f2603f':'#ffc24b'):'#9a92ff'}"></span><span>${esc(k.nama)}</span></button>`).join('')}`;
+let cur = 'utama';
+const show = h => {
+  const m = h.match(/^k-(\w\w)$/), k = m && kById(m[1]);
+  if (!V[h] && !k) h = 'utama';
+  cur = h;
+  document.getElementById('view').innerHTML = `<div class="fade">${k ? kelas(k) : V[h]()}</div>`;
+  const [t, s] = k ? [k.nama, k.hasU ? 'Ringkasan kelas · PBD dan UASA' : 'Ringkasan kelas · PBD'] : TITLE[h];
+  document.getElementById('ttl').textContent = t; document.getElementById('sub').textContent = s;
+  document.title = t + ' · Panitia Matematik';
+  side.querySelectorAll('.nv').forEach(b => b.classList.toggle('on', b.dataset.go === h));
+  if (location.hash.slice(1) !== h) { try { history.replaceState(null,'','#'+h); } catch(e) {} }
+  side.querySelector('.nv.on')?.scrollIntoView({block:'nearest',inline:'nearest'});
+  window.scrollTo(0,0);
+};
+const step = d => { const i = SEQ.indexOf(cur) + d; if (SEQ[i]) show(SEQ[i]); };
+document.addEventListener('click', e => { const t = e.target.closest('[data-go]'); if (t) show(t.dataset.go); });
+document.getElementById('bPrev').onclick = () => step(-1);
+document.getElementById('bNext').onclick = () => step(1);
+document.getElementById('bFull').onclick = () => { try { (document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen()).catch(()=>{}); } catch(e) {} };
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'PageDown') { e.preventDefault(); step(1); }
+  else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); step(-1); }
+  else if (e.key === 'Home' || e.key === 'm' || e.key === 'M') show('utama');
+  else if (e.key === 'f' || e.key === 'F') document.getElementById('bFull').click();
+});
+window.addEventListener('hashchange', () => { const h = location.hash.slice(1); if (h && h !== cur) show(h); });
+show(location.hash.slice(1) || 'utama');
+}
+</script>
+</body>
+</html>
