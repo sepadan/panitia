@@ -1,4 +1,4 @@
-# Dialog Prestasi 2026 · SK Paya Redan
+# Panitia Sepadan · SK Paya Redan
 
 Papan pemuka **Dialog Prestasi 2026** bagi **semua subjek** (12 subjek): rumusan PBD akhir tahun (8 kelas, 205 murid) dan UASA (Tahun 4–6), dengan analisis mengikut subjek, kelas dan murid serta kategori lemah, sederhana dan cemerlang. Menu utama memaparkan kad setiap subjek; pilih subjek untuk ringkasan, rumusan PBD, keputusan UASA, jurang PBD–UASA, kategori murid, cadangan, ringkasan kelas dan profil murid. Halaman *Perbandingan subjek* memaparkan purata TP setiap kelas × subjek dan purata UASA setiap subjek.
 
