@@ -5,7 +5,11 @@ Papan pemuka **Dialog Prestasi 2026** bagi **semua subjek** (12 subjek): rumusan
 **Prasekolah** dipaparkan sebagai bahagian berasingan (tidak dicampur dengan murid Tahun 1–6): tahap 8 bidang pembelajaran bagi setiap murid, kategori, perbandingan umur dan jantina, serta profil dengan ulasan penuh guru. Laporan prasekolah tidak memberi TP; tahap rendah/sederhana/tinggi ditafsir daripada tiga pernyataan ulasan standard bagi setiap bidang.
 
 - `index.html` — aplikasi satu fail, tiada kebergantungan luar selain fon Google
-- Navigasi: bar sisi, carian nama murid, atau kekunci ◀ ▶ · M (menu utama) · F (skrin penuh)
+- **Murid berisiko**: murid Tahun 1–6 yang lemah dalam 3 subjek atau lebih
+- **Jurang PBD–UASA**: carta TP lawan markah UASA (setiap titik seorang murid)
+- **Cetak**: susun atur A4 bagi halaman semasa
+- **Persembahan**: skrin penuh tanpa bar sisi; ◀ ▶ untuk beralih, P untuk buka/tutup
+- Navigasi: bar sisi, carian nama murid, atau kekunci ◀ ▶ · M (menu utama)
 
 ## Privasi dan akses
 
