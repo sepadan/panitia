@@ -9,6 +9,7 @@ Papan pemuka **Dialog Prestasi 2026** bagi **semua subjek** (12 subjek): rumusan
 - **Jurang PBD–UASA**: carta TP lawan markah UASA (setiap titik seorang murid)
 - **BMI**: status BMI Tahun 1–6 ikut kelas, perubahan ujian 1 → 2, senarai murid obes dan kurus
 - **SEGAK**: status kecergasan Tahun 4–6, purata skor setiap ujian, murid kurang cergas dan yang juga obes/berlebihan berat; profil murid memaparkan BMI dan skor SEGAK
+- **Kehadiran**: Jan–Okt 2026 (MOEIS) — peratus setiap kelas dan kategori, trend bulanan, kaitan dengan markah UASA, senarai kritikal dan perlu perhatian, butiran bulanan setiap murid; turut dipaparkan dalam profil murid
 - **Infografik**: satu skrin bagi setiap topik (gambaran sekolah, subjek, kelas, prasekolah, SEGAK dan BMI) dengan piktograf murid, cincin peratus, tolok dan pelan kelas; ikon, meja dan nama boleh ditekan untuk butiran murid
 - **Cetak**: susun atur A4 bagi halaman semasa
 - **Persembahan**: skrin penuh tanpa bar sisi; ◀ ▶ untuk beralih, P untuk buka/tutup
